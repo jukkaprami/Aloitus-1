@@ -1,21 +1,6 @@
 # SOVELLUS PAINOINDEKSIN JA KEHON RASVAPROSENTIN LASKEMISEEN
 # ==========================================================
 
-# Muuttujat
-
-# Kysytään käyttäjältä tiedot
-pituus_teksti = input('Kuinka pitkä olet (cm): ')
-paino_teksti = input('Kuinka paljon painat (kg): ')
-ika_teksti = input('Kuinka vanha olet: ')
-sukupuoli_teksti = input('Sukupuoli mies, vastaa 1, nainen vastaa 0: ')
-
-# Muutetaan vastaukset liukuluvuiksi
-pituus = float(pituus_teksti)
-paino = float(paino_teksti)
-ika = float(ika_teksti)
-sukupuoli = float(sukupuoli_teksti)
-
-
 # Määritellään funktio painoindeksin laskentaan
 def laske_bmi(paino, pituus):
     """Laskee painoindeksin (BMI)
@@ -33,6 +18,7 @@ def laske_bmi(paino, pituus):
     return bmi
 
 
+# Määritellään funktio aikuisen kehonrasvaprosentin laskemiseen
 def aikuisen_rasvaprosentti(bmi, ika, sukupuoli):
     """_summary_
 
@@ -48,6 +34,7 @@ def aikuisen_rasvaprosentti(bmi, ika, sukupuoli):
     rasvaprosentti = round(rasvaprosentti)
     return rasvaprosentti
 
+# Määritellään funktio lapsen kehonrasvaprosentin laskemiseen
 def lapsen_rasvaprosentti(bmi, ika, sukupuoli):
     """Laskee lapsen kehon rasvaprosentin
 
@@ -63,8 +50,34 @@ def lapsen_rasvaprosentti(bmi, ika, sukupuoli):
     return rasvaprosentti
 
 
-oma_bmi = laske_bmi(paino, pituus)
-oma_rasvaprosentti = lapsen_rasvaprosentti(oma_bmi, ika, sukupuoli)
+# Suoritetaan seuraavat rivit vain, jos tämä tiedosto on pääohjelma
+# Mahdollistaa funktioiden lataamisen toisiin ohjelmiin
+# Kun koodi ladataan toiseen tiedostoon,
+# if __name__ == "__main__":n alapuolella olevaa koodia ei suoriteta
+if __name__ == "__main__":
 
-print('Painoindeksisi on', oma_bmi,
-      'ja kehon rasvaprosentti on', oma_rasvaprosentti)
+    # Kysytään käyttäjältä tiedot
+    pituus_teksti = input('Kuinka pitkä olet (cm): ')
+    paino_teksti = input('Kuinka paljon painat (kg): ')
+    ika_teksti = input('Kuinka vanha olet: ')
+    sukupuoli_teksti = input('Sukupuoli mies, vastaa 1, nainen vastaa 0: ')
+
+    # Muutetaan vastaukset liukuluvuiksi
+    pituus = float(pituus_teksti)
+    paino = float(paino_teksti)
+    ika = float(ika_teksti)
+    sukupuoli = float(sukupuoli_teksti)
+
+    # Lasketaan painoindeksi funktiolla laske_bmi
+    oma_bmi = laske_bmi(paino, pituus)
+
+    # Yli 18 vuotiailla käytetään aikuisen kaavaa
+    if ika >= 18:
+        oma_rasvaprosentti = aikuisen_rasvaprosentti(oma_bmi, ika, sukupuoli)
+
+    # Muussa tapauksessa käytetään lapsen kaavaa
+    else:
+        oma_rasvaprosentti = lapsen_rasvaprosentti(oma_bmi, ika, sukupuoli)
+
+    print('Painoindeksisi on', oma_bmi,
+          'ja kehon rasvaprosentti on', oma_rasvaprosentti)
