@@ -51,7 +51,7 @@ class Kuntoilija:
         """Laskee kehon rasvaprosentin USA:n armeijan kaavalla
 
         Args:
-            pituus (float)
+            pituus (float): pituus (cm)
             vyotaron_ymparys (float): vyötärön ympärysmitta (cm)
             lantion_ymparys (float): lantion ympärysmitta (cm)
             kaulan_ymparys (float): kaulan ympärysmitta (cm)
