@@ -4,9 +4,55 @@
 # LIBRARIES AND MODULES
 import kuntoilija
 
+
+
+# Ask a question and convert the answer to float
+
+
+def ask_user(question):
+    """Asks a question from the user and converts answer to a floating point number
+
+    Args:
+        question (str): The question to ask
+
+    Returns:
+        tuple: answer as float, Error message, Error Code and a detailed error message
+    """
+    while True:
+        answer_txt = input(question)
+
+        # Let's try to convert input to numeric
+        try:
+            answer = float(answer_txt)
+            result = (answer, 'OK', 0, 'Conversion successful')
+            break
+    # If an error occurs tell the user to check
+        except Exception as e:
+            print('Virhe syötetyssä arvossa, älä käytä yksiköitä', e)
+            result = (0, 'Error', 1, str(e))
+    return result
+
+
 # Enter information about an athlete
 nimi = input('Nimi: ')
 
+# Use ask_user function to get height and convert it into float
+answer = ask_user('Pituus (cm) ')
+
+# Read the 1st element of the tuple containing height value
+pituus = answer[0]
+
+answer = ask_user('Paino (kg) ')
+paino = answer[0]
+
+answer = ask_user('Ikä ')
+ika = answer[0]
+
+answer = ask_user('Sukupuoli 0-nainen, 1-mies) ')
+sukupuoli = answer[0]
+
+
+'''
 # Loop until user gives a correctly formatted value to height question
 while True:
     pituus_txt = input('Pituus (cm): ')
@@ -56,7 +102,10 @@ while True:
     except Exception as e:
         print('Virhe syötetyssä arvossa, vain 1 ja 0 sallittu', e)
 
-
+'''
 kuntoilija1 = kuntoilija.Kuntoilija(nimi, pituus, paino, ika, sukupuoli)
 
 print(kuntoilija1.nimi, 'painoindeksisi on ', kuntoilija1.bmi)
+
+print('Viimeisen kysymyksen virheilmoitus',
+      answer[1], 'koodi', answer[2], 'engl. ilmoitus', answer[3])
