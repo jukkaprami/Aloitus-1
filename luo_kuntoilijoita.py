@@ -66,9 +66,5 @@ athlete_data.append(athlete_data_row)
 # SAVE DATA TO A FILE
 
 with open('athlete_data.json', 'w') as file:
-    json.dump(athlete_data, file)
+    json.dump(athlete_data, file, indent=4)
 
-
-# TODO: Save user information to a file -> Serialization
-# TODO: Read it from a JSON file
-# TODO: Add date of weighting to kuntoilija class
